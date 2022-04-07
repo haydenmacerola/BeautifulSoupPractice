@@ -3,13 +3,13 @@ from selenium import webdriver
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.by import By
 
-team_id = '1026982'
+team_id = '1026982' ##insert your team id
 
 driver = webdriver.Chrome()
 url = f'https://fantasy.premierleague.com/entry/{team_id}/history'
 
 driver.get(url)
-driver.implicitly_wait(5)
+driver.implicitly_wait(3)
 
 
 tdata = driver.find_elements(By.XPATH, '//*[@id="root"]/div[2]/div/div[1]/div[2]/div[2]/table/tbody/tr')
@@ -38,10 +38,14 @@ for row in tdata:
     rank.append(OR)
     value.append(Value)
 
+driver.quit()
+
 gw_history = {'gameweek': gameweek, 'gwpoints': gw_points, 
 'transfers': transfers, 'trasnfercost':transfercost, 'pointstotal':overall_points, 'or':rank, 'teamvalue': value}
 
+history_df = pd.DataFrame.from_dict(gw_history)
+history_df.to_csv(f'gw_history_{team_id}.csv', index=False)
 
 
-driver.close()
+
 
