@@ -22,6 +22,13 @@ overall_points = []
 rank = []
 value = []
 
+manager = driver.find_elements(By.XPATH, '//*[@id="root"]/div[2]/div/div[2]/div/h2')
+
+gaffer = []
+
+for name in manager:
+    gaffer.append(name.text)
+
 for row in tdata:
     GW = row.find_element(By.XPATH,'./td[1]').text
     GWP = row.find_element(By.XPATH,'./td[2]').text
@@ -43,8 +50,9 @@ driver.quit()
 gw_history = {'gameweek': gameweek, 'gwpoints': gw_points, 
 'transfers': transfers, 'trasnfercost':transfercost, 'pointstotal':overall_points, 'or':rank, 'teamvalue': value}
 
+
 history_df = pd.DataFrame.from_dict(gw_history)
-history_df.to_csv(f'gw_history_{team_id}.csv', index=False)
+history_df.to_csv(f'gw_history_{gaffer}.csv', index=False)
 
 
 
