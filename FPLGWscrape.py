@@ -3,7 +3,7 @@ from selenium import webdriver
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.common.by import By
 
-team_id = '1026982' ##insert your team id
+team_id = '131' ##insert your team id
 
 driver = webdriver.Chrome()
 url = f'https://fantasy.premierleague.com/entry/{team_id}/history'
